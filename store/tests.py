@@ -57,6 +57,26 @@ class TestUrls(SimpleTestCase):
         url = reverse('process_order')
         print(resolve(url))
         self.assertEquals(resolve(url).func, processOrder)
+    
+    def test_support_url_is_resolved(self):
+        url = reverse('support')
+        print(resolve(url))
+        self.assertEquals(resolve(url).func, support)
+    
+    def test_post_url_is_resolved(self):
+        url = reverse('post')
+        print(resolve(url))
+        self.assertEquals(resolve(url).func, post)
+    
+    def test_post_list_url_is_resolved(self):
+        url = reverse('post_list')
+        print(resolve(url))
+        self.assertEquals(resolve(url).func, all_posts)
+    
+    def test_exchange_url_is_resolved(self):
+        url = reverse('exchange')
+        print(resolve(url))
+        self.assertEquals(resolve(url).func, exchange)
 
 
 class TestViews(TestCase):
@@ -88,12 +108,33 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code,200)
         self.assertTemplateUsed(response, 'store/cart.html')
 
-    def test_checkout_GET(self):
+    def test_support_GET(self):
         client = Client()
-        response = client.get(reverse('checkout'))
+        response = client.get(reverse('support'))
         
         self.assertEquals(response.status_code,200)
-        self.assertTemplateUsed(response, 'store/checkout.html')
+        self.assertTemplateUsed(response, 'store/support.html')
+    
+    def test_post_GET(self):
+        client = Client()
+        response = client.get(reverse('post'))
+        
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response, 'store/post.html')
+    
+    def test_exchange_GET(self):
+        client = Client()
+        response = client.get(reverse('exchange'))
+        
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response, 'store/exchange.html')
+    
+    def test_all_posts_GET(self):
+        client = Client()
+        response = client.get(reverse('all_posts'))
+        
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response, 'store/all_posts.html')
     
     def test_register_POST(self):
         rv = self.client.post("register",{

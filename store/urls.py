@@ -12,4 +12,10 @@ urlpatterns = [
     path('login/', views.loginPage, name="login"),
     path('logout/', views.logoutUser, name="logout"),
     path('process_order/', views.processOrder, name="process_order"),
+    path('support/', views.support, name="support"),
+    path('post/', views.post, name="post"),
+    path('post_list/', views.all_posts, name="post_list"),
+    path('show_post/<post_id>', views.show_post, name="show_post"),
+    path('exchange/', views.exchange, name="exchange"),
+
 ]

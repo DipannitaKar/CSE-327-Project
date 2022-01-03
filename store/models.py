@@ -164,4 +164,40 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return self.address
         
-    
+        
+class Support(models.Model):
+    """
+    This class is used to store the Complaints/Feedback inputted by the user
+
+    This class is extended from the Model class so it has all the functionality
+    of the model class.
+
+    this class is used to create objects for database entry
+    """
+    first_name = models.CharField(max_length=50, null=False)
+    last_name = models.CharField(max_length=50, null=False)
+    email = models.EmailField(max_length=100, null=False)
+    message = models.TextField(max_length=5000, null=False)
+
+    def __str__(self):
+        return self.email
+
+class Post(models.Model):
+    """
+    This class is used to store the Exchange Posts inputted by the user
+
+    This class is extended from the Model class so it has all the functionality
+    of the model class.
+
+    this class is used to create objects for database entry
+    """
+    title = models.CharField(max_length=255)
+    poster = models.CharField(max_length=100)
+    mobile = models.CharField(max_length=15, blank= True, null= True)
+    email = models.EmailField(max_length= 50, blank= True, null= True)
+    body = models.TextField(blank=True, null=True)
+    post_date = models.DateField(auto_now_add=True)
+    category = models.CharField(max_length=255, default='Smartphone')
+
+    def __str__(self):
+        return self.title + ' | ' + str(self.poster)

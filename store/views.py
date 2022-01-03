@@ -1,10 +1,11 @@
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render,redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 import json
 import datetime
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, PostForm, SupportForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -285,3 +286,85 @@ def logoutUser(request):
     """
     logout(request)
     return redirect('login')
+
+def support(request):
+    """
+    This method is used to view and post at the Support page.
+    :param request: it's a HttpResponse from user.
+    :type request: HttpResponse.
+    :return: this method returns a Support page which is a HTML page.
+    :rtype: HttpResponse.
+    """
+    submitted = False
+    if request.method == "POST":
+        support_form = SupportForm(request.POST)
+        
+        if support_form.is_valid():
+            support_form.save()
+            return HttpResponseRedirect('/support?submitted=True')
+    else:
+        support_form = SupportForm   
+        if 'submitted' in request.GET:
+            submitted = True
+    
+    return render(request,'store/support.html', 
+    {"support_form": support_form, 
+    "submitted": submitted})
+
+def post(request):
+    """
+    This method is used to create post.
+    :param request: it's a HttpResponse from user.
+    :type request: HttpResponse.
+    :return: this method returns a post creation page which is a HTML page.
+    :rtype: HttpResponse.
+    """
+    submitted = False
+    if request.method == "POST":
+        post_form = PostForm(request.POST)
+        
+        if post_form.is_valid():
+            post_form.save()
+            return HttpResponseRedirect('/post?submitted=True')
+    else:
+        post_form = PostForm   
+        if 'submitted' in request.GET:
+            submitted = True
+    
+    return render(request,'store/post.html', 
+    {"post_form": post_form, 
+    "submitted": submitted})
+
+def exchange(request):
+    """
+    This method is used to view the exchange page.
+    :param request: it's a HttpResponse from user.
+    :type request: HttpResponse.
+    :return: this method returns the exchange page which is a HTML page.
+    :rtype: HttpResponse.
+    """
+    return render(request, 'store/exchange.html')
+
+def all_posts(request):
+    """
+    This method is used to view all posts from people.
+    :param request: it's a HttpResponse from user.
+    :type request: HttpResponse.
+    :return: this method returns a page which is a HTML page.
+    :rtype: HttpResponse.
+    """
+    post_list = Post.objects.all()
+    return render(request, 'store/all_posts.html',
+    {"post_list": post_list,})
+
+def show_post(request, post_id):
+    """
+    This method is used to view a particular exchange post.
+    :param request: it's a HttpResponse from user.
+    :type request: HttpResponse.
+    :return: this method returns a page containing post iinformation which is a HTML page.
+    :rtype: HttpResponse.
+    """
+    post = Post.objects.get(pk=post_id)
+    return render(request, 'store/show_post.html',
+    {"post": post})
