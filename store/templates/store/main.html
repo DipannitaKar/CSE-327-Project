@@ -95,10 +95,10 @@
                   <li><a class="dropdown-item" href="{% url 'viewall' %}">View All</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link" aria-current="page" href="#">ExchangeZone</a>
+              <li><a class="nav-link" aria-current="page" href="{% url 'exchange' %}">Exchange Zone</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">ContactUs</a>
+                <a class="nav-link" href="{% url 'support' %}">Contact Us</a>
               </li>
               
             </ul>
@@ -163,8 +163,8 @@
             <h6 style="color:black;">Quick Links</h6>
             <ul class="footer-links">
               <li><a href="{% url 'store' %}">Home</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">Link 3</a></li>
+              <li><a href="{% url 'support' %}">Contact Us</a></li>
+              <li><a href="{% url 'exchange' %}">Exchange Zone</a></li>
               <li><a href="#">Link 4</a></li>
             </ul>
           </div>

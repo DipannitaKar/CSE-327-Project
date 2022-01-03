@@ -1,0 +1,12 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<head>
+<title>Exchange Zone</title>
+<center>
+
+             <a href="{% url 'post_list' %}"class="btn btn-secondary btn-lg">View Posts</a>
+            <a href="{% url 'post' %}"class="btn btn-primary btn-lg">Add Post</a>
+
+    </center>
+{% endblock content %}

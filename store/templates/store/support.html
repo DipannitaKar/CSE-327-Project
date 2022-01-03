@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<head>
+<title>Support</title>
+<center>
+
+        {% if submitted %}
+            <h1>Your query reached us successfully!</h1>
+
+        {% else %}
+        <h1>How can we help you...</h1>
+        <br></br>
+            <form action="" method=POST>
+                {% csrf_token %}
+                
+                {{ support_form.as_p }}
+
+                <input type="submit" value="Submit" class="btn btn-secondary">
+            </form>
+        {% endif %}
+
+    </center>
+{% endblock content %}

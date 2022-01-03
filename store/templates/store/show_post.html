@@ -1,0 +1,23 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="card">
+        <div class="card-header">
+          Post Details
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">
+            <ul>
+                <li>Poster Name: {{ post.poster }}</li> 
+                <li>Mobile: {{ post.mobile }}</li> 
+                <li>Email: {{ post.email }}</li> 
+                <li>Description: {{ post.body }}</li> 
+                <li>Post Date: {{ post.post_date }}</li> 
+                <li>Category: {{ post.category }}</li> 
+            </ul>
+          </p>
+        </div>
+      </div>
+{% endblock content %}

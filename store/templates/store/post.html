@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<head>
+<title>Post</title>
+<center>
+
+        {% if submitted %}
+            <h1>Post Created successfully!</h1>
+
+        {% else %}
+        <h1>Create a New Post</h1>
+        <br></br>
+            <form action="" method=POST>
+                {% csrf_token %}
+                
+                {{ post_form.as_p }}
+
+                <input type="submit" value="Submit" class="btn btn-secondary">
+            </form>
+        {% endif %}
+
+    </center>
+{% endblock content %}
